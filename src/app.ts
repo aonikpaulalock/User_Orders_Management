@@ -1,8 +1,20 @@
-import express from "express"
-const app = express()
+import express, { Request, Response } from "express"
+import cors from "cors"
+import { studentRouter } from "./app/config/module/user/user.route";
+const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+// Parser
+app.use(cors())
+app.use(express.json())
+
+app.use("/api/users", studentRouter)
+
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    data: 'Hello World!'
+  })
 })
 
 export default app
