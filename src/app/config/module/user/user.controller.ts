@@ -15,8 +15,11 @@ const createUserIntoDB = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(400).json({
       success: false,
-      message: error.message || "somethings went wrong",
-      error
+      message: "Failed to create user",
+      error: {
+        code: 400,
+        description: error.message
+      }
     })
   }
 }
@@ -26,15 +29,18 @@ const GetAllUserIntoDB = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "successfully get data",
+      message: "Users fetched successfully!",
       data: result
     })
   }
   catch (error: any) {
     res.status(400).json({
       success: false,
-      message: error.message || "somethings went wrong",
-      error
+      message: "Failed to fetch",
+      error: {
+        code: 400,
+        description: error.message
+      }
     })
   }
 }
@@ -45,15 +51,18 @@ const GetSingleUserIntoDB = async (req: Request, res: Response) => {
     const result = await UserService.GetSingleUserService(userId)
     res.status(200).json({
       success: true,
-      message: "successfully get data",
+      message: "User fetched successfully!",
       data: result
     })
   }
   catch (error: any) {
     res.status(400).json({
       success: false,
-      message: error.message || "somethings went wrong",
-      error
+      message: "Failed to fetch",
+      error: {
+        code: 400,
+        description: error.message
+      }
     })
   }
 }
@@ -66,15 +75,18 @@ const GetSingleUserUpdateIntoDB = async (req: Request, res: Response) => {
     const result = await UserService.GetSingleUserUpdateService(userId, user)
     res.status(200).json({
       success: true,
-      message: "successfully update data",
+      message: "User updated successfully!",
       data: result
     })
   }
   catch (error: any) {
     res.status(400).json({
       success: false,
-      message: error.message || "somethings went wrong",
-      error
+      message: "Failed to update user",
+      error: {
+        code: 400,
+        description: error.message
+      }
     })
   }
 }
@@ -84,15 +96,18 @@ const DeleteSingleUserIntoDB = async (req: Request, res: Response) => {
     const result = await UserService.DeleteSingleUserService(userId)
     res.status(200).json({
       success: true,
-      message: "successfully delete data",
+      message: "User deleted successfully!",
       data: result
     })
   }
   catch (error: any) {
     res.status(400).json({
       success: false,
-      message: error.message || "somethings went wrong",
-      error
+      message: "Failed to delete data",
+      error: {
+        code: 400,
+        description: error.message
+      }
     })
   }
 }

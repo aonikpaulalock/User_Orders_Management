@@ -90,6 +90,12 @@ const userMainSchema = new Schema<TUser, TUserModel>({
   },
 });
 
+// Is user Exists
+userMainSchema.statics.isUserExists = async function (userId: number | string) {
+  const existingUser = await UserModel.findOne({ userId })
+  return existingUser;
+}
+
 userMainSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
@@ -103,14 +109,6 @@ userMainSchema.methods.toJSON = function () {
   delete cloneObj.password
   return cloneObj;
 };
-
-// Is user Exists
-userMainSchema.statics.isUserExists = async function (userId: number | string) {
-  const existingUser = await UserModel.findOne({ userId })
-  return existingUser
-}
-
-
 
 // creating model
 export const UserModel = model<TUser, TUserModel>('User', userMainSchema);
