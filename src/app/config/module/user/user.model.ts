@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TUser, TUserAdress, TUserFullName, TUserOrder } from "./user.interface";
+import { TUser, TUserAdress, TUserFullName, TUserModel, TUserOrder } from "./user.interface";
 import bcrypt from "bcrypt"
 import config from "../..";
 const userFullNameSchema = new Schema<TUserFullName>({
@@ -43,7 +43,7 @@ const userOrderSchema = new Schema<TUserOrder>({
   },
 });
 
-const userMainSchema = new Schema<TUser>({
+const userMainSchema = new Schema<TUser, TUserModel>({
   userId: {
     type: Number,
     required: [true, 'User ID is required'],
@@ -104,7 +104,13 @@ userMainSchema.methods.toJSON = function () {
   return cloneObj;
 };
 
+// Is user Exists
+userMainSchema.statics.isUserExists = async function (userId: number | string) {
+  const existingUser = await UserModel.findOne({ userId })
+  return existingUser
+}
+
 
 
 // creating model
-export const UserModel = model<TUser>('User', userMainSchema);
+export const UserModel = model<TUser, TUserModel>('User', userMainSchema);

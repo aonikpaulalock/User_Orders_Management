@@ -9,18 +9,32 @@ const UserCreateService = async (studentData: TUser) => {
 }
 // Get all users
 const GetAllUserService = async () => {
-  const result = await UserModel.find();
+  const result = await UserModel
+    .find()
+    // .select({
+    //   "username": 1,
+    //   "fullName": 1,
+    //   "age": 1,
+    //   "email": 1,
+    //   "address": 1
+    // });
   return result
 }
 
 // Get single user
 const GetSingleUserService = async (userId: string | number) => {
+  if (await UserModel.isUserExists(userId)) {
+    throw new Error("User not found")
+  }
   const result = await UserModel.findOne({ userId });
   return result
 }
 
 // Update_User
 const GetSingleUserUpdateService = async (userId: string | number, userData: TUser) => {
+  if (await UserModel.isUserExists(userId)) {
+    throw new Error("User not found")
+  }
   const result = await UserModel.findOneAndUpdate(
     { userId }, { $set: userData },
     { new: true, runValidators: true }
@@ -29,6 +43,9 @@ const GetSingleUserUpdateService = async (userId: string | number, userData: TUs
 }
 // Delete_User
 const DeleteSingleUserService = async (userId: string | number) => {
+  if (await UserModel.isUserExists(userId)) {
+    throw new Error("User not found")
+  }
   const result = await UserModel.deleteOne({ userId })
   return result
 }
