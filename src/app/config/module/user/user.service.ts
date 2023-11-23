@@ -1,34 +1,42 @@
 import { TUser } from "./user.interface";
 import { UserModel } from "./user.model";
 
-const UserCreateService = async (studentData: TUser) => {
 
-  // const student = new Student(studentData) // instance method
-  // // Custom instace methods
-  // if (await student.isUserExists(student.id)) {
-  //   throw Error("User Already Exists")
-  // }
-  // // student.isUserExists
-  // const result = student.save()
-  // if (await Student.isUserExists(studentData.id)) {
-  //   throw Error("User static already exists")
-  // }
-  // bulid in static method
+// Create user
+const UserCreateService = async (studentData: TUser) => {
   const result = await UserModel.create(studentData);
   return result
 }
-
+// Get all users
 const GetAllUserService = async () => {
   const result = await UserModel.find();
   return result
 }
-const GetSingleUserService = async (userId: string) => {
+
+// Get single user
+const GetSingleUserService = async (userId: string | number) => {
   const result = await UserModel.findOne({ userId });
+  return result
+}
+
+// Update_User
+const GetSingleUserUpdateService = async (userId: string | number, userData: TUser) => {
+  const result = await UserModel.findOneAndUpdate(
+    { userId }, { $set: userData },
+    { new: true, runValidators: true }
+  )
+  return result
+}
+// Delete_User
+const DeleteSingleUserService = async (userId: string | number) => {
+  const result = await UserModel.deleteOne({ userId })
   return result
 }
 
 export const UserService = {
   UserCreateService,
   GetAllUserService,
-  GetSingleUserService
+  GetSingleUserService,
+  GetSingleUserUpdateService,
+  DeleteSingleUserService
 } 

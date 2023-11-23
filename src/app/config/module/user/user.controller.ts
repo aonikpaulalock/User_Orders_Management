@@ -58,8 +58,50 @@ const GetSingleUserIntoDB = async (req: Request, res: Response) => {
   }
 }
 
+
+const GetSingleUserUpdateIntoDB = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const { user } = req.body;
+    const result = await UserService.GetSingleUserUpdateService(userId, user)
+    res.status(200).json({
+      success: true,
+      message: "successfully update data",
+      data: result
+    })
+  }
+  catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "somethings went wrong",
+      error
+    })
+  }
+}
+const DeleteSingleUserIntoDB = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserService.DeleteSingleUserService(userId)
+    res.status(200).json({
+      success: true,
+      message: "successfully delete data",
+      data: result
+    })
+  }
+  catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "somethings went wrong",
+      error
+    })
+  }
+}
+
+
 export const UserController = {
   createUserIntoDB,
   GetAllUserIntoDB,
-  GetSingleUserIntoDB
+  GetSingleUserIntoDB,
+  GetSingleUserUpdateIntoDB,
+  DeleteSingleUserIntoDB
 }

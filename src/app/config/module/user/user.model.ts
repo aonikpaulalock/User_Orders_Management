@@ -98,10 +98,12 @@ userMainSchema.pre('save', async function (next) {
 });
 
 // replace password field
-userMainSchema.post("save", async function (doc, next) {
-  doc.password = ""
-  next();
-})
+userMainSchema.methods.toJSON = function () {
+  const cloneObj = this.toObject();
+  delete cloneObj.password
+  return cloneObj;
+};
+
 
 
 // creating model
