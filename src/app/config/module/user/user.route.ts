@@ -9,5 +9,8 @@ router
   .get("/:userId", UserController.GetSingleUserIntoDB)
   .put("/:userId", UserController.GetSingleUserUpdateIntoDB)
   .delete("/:userId", UserController.DeleteSingleUserIntoDB)
+  .put("/:userId/orders",UserController.UserOrderUpdateIntoDB)
+  .get("/:userId/orders",UserController.SingleUserOrderIntoDB)
+  .get("/:userId/orders/total-price",UserController.CalculateSingleUserOrderIntoDB)
 
 export const studentRouter = router;

@@ -23,6 +23,7 @@ const createUserIntoDB = async (req: Request, res: Response) => {
     })
   }
 }
+
 const GetAllUserIntoDB = async (req: Request, res: Response) => {
   try {
     const result = await UserService.GetAllUserService();
@@ -113,10 +114,94 @@ const DeleteSingleUserIntoDB = async (req: Request, res: Response) => {
 }
 
 
+// Order_Update
+const UserOrderUpdateIntoDB = async (req: Request, res: Response) => {
+  try {
+
+    const { userId } = req.params;
+    const orders = req.body;
+
+    const result = await UserService.UserOrderService(userId, orders)
+
+    res.status(200).json({
+      success: true,
+      message: "Order update successfully!",
+      data: result
+    })
+  }
+
+  catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to order",
+      error: {
+        code: 400,
+        description: error.message
+      }
+    })
+  }
+}
+
+// Calculate User Order 
+const SingleUserOrderIntoDB = async (req: Request, res: Response) => {
+  try {
+
+    const { userId } = req.params;
+
+    const result = await UserService.SingleUserAllOrderService(userId)
+
+    res.status(200).json({
+      success: true,
+      message: "Total price calculated successfully!",
+      data: result
+    })
+  }
+
+  catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to order",
+      error: {
+        code: 400,
+        description: error.message
+      }
+    })
+  }
+}
+// Single user alll Order
+const CalculateSingleUserOrderIntoDB = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const totalPrice = await UserService.CalculateSingleUserOrderService(userId)
+
+    res.status(200).json({
+      success: true,
+      message: "Total price calculated successfully!",
+      data: { totalPrice }
+    })
+  }
+
+  catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to calculate",
+      error: {
+        code: 400,
+        description: error.message
+      }
+    })
+  }
+}
+
+
 export const UserController = {
   createUserIntoDB,
   GetAllUserIntoDB,
   GetSingleUserIntoDB,
   GetSingleUserUpdateIntoDB,
-  DeleteSingleUserIntoDB
+  DeleteSingleUserIntoDB,
+  UserOrderUpdateIntoDB,
+  SingleUserOrderIntoDB,
+  CalculateSingleUserOrderIntoDB
 }

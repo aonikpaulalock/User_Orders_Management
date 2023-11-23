@@ -27,7 +27,7 @@ export type TUser = {
   isActive: "active" | "inactive";
   hobbies: Array<string>;
   address: TUserAdress;
-  orders?: TUserOrder[];
+  orders?: Array<TUserOrder>;
 }
 
 
