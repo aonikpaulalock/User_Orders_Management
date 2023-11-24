@@ -30,9 +30,7 @@ export type TUser = {
   orders?: Array<TUserOrder>;
 }
 
-
+// Static methods
 export interface TUserModel extends Model<TUser> {
   isUserExists(userId: string | number): Promise<TUser | null>
 }
-
-// export type TUserModel = Model<TUser, Record<string, never>, TUserMethods>;

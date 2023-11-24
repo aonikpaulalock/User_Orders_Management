@@ -1,14 +1,16 @@
+// import { useUserExists } from "../../../utils/UserExists";
 import { TUser, TUserOrder } from "./user.interface";
 import { UserModel } from "./user.model";
 
 
-// Create user
+// Create user Sevice
 const UserCreateService = async (studentData: TUser) => {
   const result = await UserModel.create(studentData);
   return result
 }
 
-// Get all users
+// Get all users Service
+
 const GetAllUserService = async () => {
   const result = await UserModel
     .find()
@@ -22,19 +24,22 @@ const GetAllUserService = async () => {
   return result
 }
 
-// Get single user
+// Get single user Service
+
 const GetSingleUserService = async (userId: string | number) => {
   const result = await UserModel.findOne({ userId });
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
-  }
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
+  };
   return result
 }
 
-// Update_User
+// Update user Service
 const GetSingleUserUpdateService = async (userId: string | number, userData: TUser) => {
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
   }
   const result = await UserModel.findOneAndUpdate(
     { userId }, { $set: userData },
@@ -43,23 +48,24 @@ const GetSingleUserUpdateService = async (userId: string | number, userData: TUs
   return result
 }
 
-// Delete_User
+// Delete user Service
+
 const DeleteSingleUserService = async (userId: string | number) => {
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
   }
   const result = await UserModel.findOneAndDelete({ userId })
   return result
 }
 
-// user order update
+// User order update Service
 const UserOrderService = async (userId: string | number, orderData: TUserOrder) => {
 
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
   }
-
-  // const { productName, price, quantity } = orderData
   const result = await UserModel.findOneAndUpdate(
     { userId, orders: { $exists: true } },
     { $push: { orders: orderData } },
@@ -68,28 +74,30 @@ const UserOrderService = async (userId: string | number, orderData: TUserOrder) 
   return result
 }
 
-// All orders for a specific user
+// All orders specific user Service
 const SingleUserAllOrderService = async (userId: string | number) => {
 
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
   }
   const result = await UserModel.findOne({ userId }).select({ "orders": 1, "_id": 0 })
   return result
 }
 
-// All orders for a specific user
+// Claculate orders specific user
 const CalculateSingleUserOrderService = async (userId: string | number) => {
 
-  if (!UserModel.isUserExists(userId)) {
-    throw new Error("User not found")
+  const user = await UserModel.isUserExists(userId);
+  if (!user) {
+    throw new Error("User Not found")
   }
   const result = await UserModel.findOne({ userId }).select({ "orders": 1, "_id": 0 })
   let totalPrice = 0;
   result?.orders?.forEach((order) => {
     return totalPrice += order.price * order.quantity
   })
-  return  totalPrice 
+  return totalPrice
 }
 
 
