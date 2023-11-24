@@ -17,11 +17,11 @@
 
 ### Go to the project directory
 
-cd User_Orders_Management
+```cd User_Orders_Management```
 
 ### Install dependencies
 
-npm install or i
+```npm install or i```
 
 ### Setup .env File root folder
 
@@ -31,7 +31,7 @@ npm install or i
 
 ### Start the server on the terminal
 
-npm run dev
+```npm run dev```
 
 ### Open your postman
 
@@ -61,11 +61,11 @@ npm run dev
 
 ### All orders for a specific user
 
-````http://localhost:<Your_Port>/api/users/:userId/orders```
+```http://localhost:<Your_Port>/api/users/:userId/orders```
 
 ### Calculate total price of orders for a specific user
 
-````http://localhost:<Your_Port>/api/users/2/orders/total-price```
+```http://localhost:<Your_Port>/api/users/2/orders/total-price```
 
 ❤️ Happy Coding
 ❤️ Happy Life
