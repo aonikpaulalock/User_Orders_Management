@@ -13,7 +13,7 @@
 
 ### Clone Project
 
-git clone https://github.com/aonikpaulalock/User_Orders_Management.git
+```git clone https://github.com/aonikpaulalock/User_Orders_Management.git```
 
 ### Go to the project directory
 
@@ -37,39 +37,35 @@ npm run dev
 
 ## Create a user
 
-http://localhost:<Your_Port>/api/users
+```http://localhost:<Your_Port>/api/users```
 
 ### Get all users
 
-http://localhost:<Your_Port>/api/users
+```http://localhost:<Your_Port>/api/users```
 
 ### Get specific user
 
-http://localhost:<Your_Port>/api/users/:userId
+```http://localhost:<Your_Port>/api/users/:userId```
 
 ### Update specific user
 
-http://localhost:<Your_Port>/api/users/:userId
+```http://localhost:<Your_Port>/api/users/:userId```
 
 ### Delete specific a user
 
-http://localhost:<Your_Port>/api/users/:userId
+```http://localhost:<Your_Port>/api/users/:userId```
 
 ### Add new product in your order collection
 
-http://localhost:<Your_Port>/api/users/:userId/orders
+```http://localhost:<Your_Port>/api/users/:userId/orders```
 
 ### All orders for a specific user
 
-http://localhost:<Your_Port>/api/users/:userId/orders
+````http://localhost:<Your_Port>/api/users/:userId/orders```
 
 ### Calculate total price of orders for a specific user
 
-http://localhost:<Your_Port>/api/users/2/orders/total-price
+````http://localhost:<Your_Port>/api/users/2/orders/total-price```
 
 ❤️ Happy Coding
 ❤️ Happy Life
-
-```
-
-```
