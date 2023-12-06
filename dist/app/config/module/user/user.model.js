@@ -100,13 +100,6 @@ const userMainSchema = new mongoose_1.Schema({
         default: []
     },
 });
-// Is user Exists
-userMainSchema.statics.isUserExists = function (userId) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const existingUser = yield exports.UserModel.findOne({ userId });
-        return existingUser;
-    });
-};
 userMainSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -115,6 +108,13 @@ userMainSchema.pre('save', function (next) {
         next();
     });
 });
+// Is user Exists
+userMainSchema.statics.isUserExists = function (userId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const existingUser = yield exports.UserModel.findOne({ userId });
+        return existingUser;
+    });
+};
 // replace password field
 userMainSchema.methods.toJSON = function () {
     const cloneObj = this.toObject();

@@ -6,7 +6,7 @@ import { UserZodValidationSchema } from "./user.zod.validation";
 // Create a new user
 const createUserIntoDB = async (req: Request, res: Response) => {
   try {
-    const { user } = await req.body;
+    const user = req.body;
     const userValidationWithZod = UserZodValidationSchema.parse(user)
     const result = await UserService.UserCreateService(userValidationWithZod)
     res.status(200).json({

@@ -18,14 +18,14 @@ const UserOrderZodValidation = z.object({
 });
 
 export const UserZodValidationSchema = z.object({
-  userId: z.number(),
-  username: z.string(),
-  password: z.string(),
-  fullName: UserFullNameZodValidation,
-  age: z.number(),
-  email: z.string().email(),
-  isActive: z.enum(['active', 'inactive']),
-  hobbies: z.array(z.string()),
-  address: UserAddressZodValidation,
-  orders: z.array(UserOrderZodValidation).optional(),
+    userId: z.number(),
+    username: z.string(),
+    password: z.string(),
+    fullName: UserFullNameZodValidation,
+    age: z.number(),
+    email: z.string().email(),
+    isActive: z.enum(['active', 'inactive']),
+    hobbies: z.array(z.string()),
+    address: UserAddressZodValidation,
+    orders: z.array(UserOrderZodValidation).optional(),
 });

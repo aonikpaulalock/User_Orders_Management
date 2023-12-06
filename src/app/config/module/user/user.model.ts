@@ -90,18 +90,20 @@ const userMainSchema = new Schema<TUser, TUserModel>({
   },
 });
 
-// Is user Exists
-userMainSchema.statics.isUserExists = async function (userId: number | string) {
-  const existingUser = await UserModel.findOne({ userId })
-  return existingUser;
-}
-
 userMainSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
   user.password = await bcrypt.hash(user.password, Number(config.soltRound));
   next();
 });
+
+
+// Is user Exists
+userMainSchema.statics.isUserExists = async function (userId: number | string) {
+  const existingUser = await UserModel.findOne({ userId })
+  return existingUser;
+}
+
 
 // replace password field
 userMainSchema.methods.toJSON = function () {
