@@ -76,7 +76,7 @@ const GetSingleUserIntoDB = async (req: Request, res: Response) => {
 const GetSingleUserUpdateIntoDB = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const { user } = req.body;
+    const user = req.body;
     const result = await UserService.GetSingleUserUpdateService(userId, user)
     res.status(200).json({
       success: true,
