@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Model } from "mongoose";
 
 export type TUserFullName = {
@@ -24,7 +25,7 @@ export type TUser = {
   fullName: TUserFullName;
   age: number;
   email: string;
-  isActive: "active" | "inactive";
+  isActive: boolean;
   hobbies: Array<string>;
   address: TUserAdress;
   orders?: Array<TUserOrder>;

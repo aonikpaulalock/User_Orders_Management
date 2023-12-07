@@ -82,7 +82,7 @@ const GetSingleUserIntoDB = (req, res) => __awaiter(void 0, void 0, void 0, func
 const GetSingleUserUpdateIntoDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
-        const { user } = req.body;
+        const user = req.body;
         const result = yield user_service_1.UserService.GetSingleUserUpdateService(userId, user);
         res.status(200).json({
             success: true,

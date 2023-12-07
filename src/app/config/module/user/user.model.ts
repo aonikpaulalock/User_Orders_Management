@@ -72,8 +72,7 @@ const userMainSchema = new Schema<TUser, TUserModel>({
     unique: true
   },
   isActive: {
-    type: String,
-    enum: ['active', 'inactive'],
+    type: Boolean,
     required: [true, 'Status is required']
   },
   hobbies: {
