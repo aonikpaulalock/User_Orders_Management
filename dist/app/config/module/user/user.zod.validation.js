@@ -23,7 +23,7 @@ exports.UserZodValidationSchema = zod_1.z.object({
     fullName: UserFullNameZodValidation,
     age: zod_1.z.number(),
     email: zod_1.z.string().email(),
-    isActive: zod_1.z.enum(['active', 'inactive']),
+    isActive: zod_1.z.boolean(),
     hobbies: zod_1.z.array(zod_1.z.string()),
     address: UserAddressZodValidation,
     orders: zod_1.z.array(UserOrderZodValidation).optional(),
